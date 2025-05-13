@@ -1,0 +1,37 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y g++ cmake lcov cppcheck
+
+    - name: Build with ThreadSanitizer
+      run: |
+        ./.github/workflows/build_with_tsan.sh
+
+    - name: Run unit tests with coverage
+      run: |
+        ./.github/workflows/lcov.sh
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        file: build/coverage.filtered.info
+
+    - name: Run static analysis with Cppcheck
+      run: |
+        cppcheck --suppressions-list=.github/workflows/suppressions.txt --enable=all --inconclusive --std=c++11 --suppress=missingIncludeSystem .
+
+    - name: Run ThreadSanitizer tests
+      run: |
+        ./.github/workflows/analyze_with_tsan.sh
