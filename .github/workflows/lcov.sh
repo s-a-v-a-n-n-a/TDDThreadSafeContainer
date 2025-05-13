@@ -5,5 +5,7 @@ cd build
 ./tests/test_threadsafe_storage
 
 echo "gathering coverage..."
-lcov --capture --directory src --output-file coverage.info
-genhtml -o cov-report/ coverage.info
+lcov --capture --directory . --output-file coverage.info
+lcov --remove coverage.info '*/tests/googletest/*' '/usr/*' --output-file coverage.filtered.info
+lcov --list coverage.filtered.info
+genhtml -o cov-report/ coverage.filtered.info
