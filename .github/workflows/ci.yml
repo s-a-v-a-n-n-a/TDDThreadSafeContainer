@@ -14,6 +14,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y g++ cmake lcov cppcheck
+        git submodule update --init
 
     - name: Build with ThreadSanitizer
       run: |
