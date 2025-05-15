@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.15)
 project(thread_safe_storage)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_COMPILER /usr/bin/c++)
 
-set(CMAKE_CXX_FLAGS "-O3 -Wall -fprofile-arcs -ftest-coverage -pthread -fsanitize=thread")
-set(CMAKE_EXE_LINKER_FLAGS "-lgcov")
+set(CMAKE_CXX_FLAGS "-Wall -fprofile-arcs -ftest-coverage -fkeep-static-functions -fkeep-inline-functions --coverage -pthread -fsanitize=thread")
+set(CMAKE_EXE_LINKER_FLAGS "-lgcov --coverage")
 
 add_subdirectory(tests/googletest)
 include_directories(
@@ -25,4 +25,8 @@ file(
 
 add_executable(test_threadsafe_storage ${TEST_EXE} ${LIB})
 
-target_link_libraries(test_threadsafe_storage gtest gtest_main)
+target_link_libraries(test_threadsafe_storage
+    PUBLIC gtest gtest_main
+    PRIVATE gcov
+)
+# target_link_libraries(test_threadsafe_storage gtest gtest_main)
