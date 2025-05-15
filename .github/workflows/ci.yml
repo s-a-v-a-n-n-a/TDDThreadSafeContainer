@@ -26,6 +26,7 @@ jobs:
 
     - name: Run unit tests with coverage
       run: |
+        ./.github/workflows/build_cov.sh
         ./.github/workflows/lcov.sh
 
     # - name: Deploy to GitHub Pages
@@ -40,4 +41,4 @@ jobs:
 
     - name: Run ThreadSanitizer tests
       run: |
-        ./.github/workflows/analyze_with_tsan.sh
+        ./.github/workflows/build_and_analyze_with_tsan.sh
