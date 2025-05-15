@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -Wall -fprofile-arcs -ftest-coverage -pthread -fsanitize=thread -g -lgcov -Wl,--dependency-file=CMakeFiles/test_threadsafe_storage.dir/link.d CMakeFiles/test_threadsafe_storage.dir/tests/test_threadsafe_storage.cpp.o -o test_threadsafe_storage  lib/libgtest.a lib/libgtest_main.a lib/libgtest.a
