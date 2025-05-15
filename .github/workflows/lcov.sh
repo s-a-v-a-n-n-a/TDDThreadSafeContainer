@@ -2,7 +2,7 @@
 
 echo "testing..."
 cd build
-./tests/test_threadsafe_storage
+./test_threadsafe_storage
 
 echo "gathering coverage..."
 lcov --directory . --capture --output-file coverage.info
