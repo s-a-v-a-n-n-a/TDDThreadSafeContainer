@@ -25,13 +25,13 @@ jobs:
         ./.github/workflows/lcov.sh
 
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
+      uses: codecov/codecov-action@v3
       with:
         file: build/coverage.filtered.info
 
     - name: Run static analysis with Cppcheck
       run: |
-        cppcheck --suppressions-list=.github/workflows/suppressions.txt --enable=all --inconclusive --std=c++11 --suppress=missingIncludeSystem .
+        cppcheck --suppressions-list=.github/workflows/suppressions.txt  --enable=all --inconclusive --std=c++11 -i ./tests/googletest/ --suppress=missingIncludeSystem .
 
     - name: Run ThreadSanitizer tests
       run: |
