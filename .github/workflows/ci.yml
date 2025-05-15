@@ -24,10 +24,11 @@ jobs:
       run: |
         ./.github/workflows/lcov.sh
 
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        file: build/coverage.filtered.info
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./cov-report
 
     - name: Run static analysis with Cppcheck
       run: |
