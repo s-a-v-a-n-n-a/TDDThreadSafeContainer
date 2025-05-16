@@ -4,7 +4,7 @@ echo "testing..."
 cd build
 ./test_threadsafe_storage
 
-LCOV_ARGS=(--rc lcov_branch_coverage=1)
+LCOV_ARGS=(--branch-coverage --ignore-errors mismatch)
 
 echo "gathering coverage..."
 lcov --directory .. --capture --output-file coverage.info "${LCOV_ARGS[@]}"
